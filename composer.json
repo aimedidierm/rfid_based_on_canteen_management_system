@@ -1,0 +1,5 @@
+{
+    "require": {
+        "yvesniyo/intouch-sms": "^5.0"
+    }
+}

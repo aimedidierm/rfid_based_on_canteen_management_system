@@ -1,1 +1,2 @@
-# studend_card_v2
+# student_card
+IOT project of digital student card which will facilitate cashless payment with in the college.

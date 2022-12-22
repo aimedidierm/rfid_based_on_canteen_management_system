@@ -6,7 +6,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><strong>Smart student card</strong></a>
+                <a class="navbar-brand" href="index.html"><strong>RFID Canteen MS</strong></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -63,6 +63,9 @@
                                 <a href="setransactions.php">Sellers</a>
                             </li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="withdraw.php"><i class="fa fa-money"></i> Pending withdraw</a>
                     </li>
                     <li>
                         <a href="settings.php"><i class="fa fa-gear"></i> Settings</a>

@@ -8,7 +8,7 @@ require 'php-includes/connect.php';
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Student card</title>
+    <title>RFID Canteen MS</title>
 	<!-- Bootstrap Styles-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FontAwesome Styles-->
@@ -19,7 +19,7 @@ require 'php-includes/connect.php';
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-<h1 class="page-header">Smart student card system</h1>
+<h1 class="page-header">RFID Canteen MS</h1>
     <div>
 		
             <div id="page-inner"> 
@@ -42,30 +42,6 @@ require 'php-includes/connect.php';
                                         <input type="submit" name="submit" class="btn btn-info btn-md" value="Login">
                                         </div>
                                         <a href="send.php" class="btn btn-danger">Send money</a>
-                            </div>
-                            <!-- /.row (nested) -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <div id="page-inner"> 
-              <div class="row">
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <form id="login-form" class="form" action="invoice.php" method="post">
-                                        <div class="form-group">
-                                            <label>Amandazi 300Rwf</label>
-                                            <input name="email" class="form-control" placeholder="Enter quantity" type="number">
-                                        </div>
-                                        <div class="form-group">
-                                        <input type="submit" name="submit" class="btn btn-primary" value="Login">
-                                        </div>
                             </div>
                             <!-- /.row (nested) -->
                         </div>

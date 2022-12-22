@@ -1,9 +1,11 @@
 <?php
 require 'php-includes/connect.php';
-if(isset($_GET['card'])){
-    $card = $_GET['card'];
-    $money = $_GET['money'];
-    $pass = $_GET['pass'];
+if(isset($_POST['card'])){
+    //$card = $_POST['card'];
+    $card= "E3 DA 21 AB";
+    $money = $_POST['money'];
+    //$pass = $_POST['pass'];
+    $pass = 123;
     $query = "SELECT * FROM student WHERE card = ? AND password = ? limit 1";
     $stmt = $db->prepare($query);
     $stmt->execute(array($card,$pass));
@@ -19,21 +21,19 @@ if(isset($_GET['card'])){
                 $sql ="INSERT INTO transactions (credit, student) VALUES (?,?)";
                 $stm = $db->prepare($sql);
                 $stm->execute(array($money, $user));
-                $data = array('cstatus' =>'1','balance' =>$newamount); 
-                echo $response = json_encode($data);
+                $arr = array('c' => 4,'ba' => $newamount);
+                echo $data = json_encode($arr)."\n";
             } 
         } else {
                 //no balance
-                $data = array('cstatus' =>'2'); 
-                echo $response = json_encode($data);
+                $arr = array('c' => 2,'b' => 2);
+                echo $data = json_encode($arr)."\n";
         } 
     
     } else {
         //incorrect pass
-        $data = array('cstatus' =>'3'); 
-        echo $response = json_encode($data);
-        
-
+        $arr = array('c' => 3,'b' => 2);
+        echo $data = json_encode($arr)."\n";
     }
 }
 ?>

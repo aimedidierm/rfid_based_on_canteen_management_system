@@ -14,9 +14,10 @@ if(isset($_POST['save'])){
     $email=$_POST['email'];
     $phone=$_POST['phone'];
     $card=$_POST['card'];
-    $sql ="INSERT INTO student (names, card, email, phone, balance, school) VALUES (?,?,?,?,'0',?)";
+    $password=$_POST['password'];
+    $sql ="INSERT INTO student (names, card, email, phone, balance, school,password) VALUES (?,?,?,?,'0',?,?)";
     $stm = $db->prepare($sql);
-    if ($stm->execute(array($names,$card,$email,$phone,$school))) {
+    if ($stm->execute(array($names,$card,$email,$phone,$school,$password))) {
         print "<script>alert('Student added');window.location.assign('students.php')</script>";
 
     } else{
@@ -139,6 +140,10 @@ if(isset($_POST['save'])){
                                     <div class="form-group">
                                         <label>Card number</label>
                                         <input class="form-control" type="text" name="card" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input class="form-control" type="text" name="password" required>
                                     </div>
                                     <div class="form-group">
                                     <button type="submit" class="btn btn-success" name="save"><span class="glyphicon glyphicon-check"></span> Save</button>

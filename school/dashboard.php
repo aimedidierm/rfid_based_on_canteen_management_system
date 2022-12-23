@@ -13,6 +13,15 @@ $sql = "SELECT * FROM transactions WHERE school = ?";
 $stmt = $db->prepare($sql);
 $stmt->execute(array($myid));
 $trnumb=$stmt->rowCount();
+$sql = "SELECT * FROM transactions WHERE school = ?";
+$stmt = $db->prepare($sql);
+$stmt->execute(array($myid));
+$trnumb=$stmt->rowCount();
+$sql = "SELECT SUM(debit) FROM transactions WHERE school = ?";
+$stmt = $db->prepare($sql);
+$stmt->execute(array($myid));
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+$am=$row['SUM(debit)'];
 $sql = "SELECT * FROM student";
 $stmt = $db->prepare($sql);
 $stmt->execute();
@@ -78,7 +87,7 @@ $sellers=$stmt->rowCount();
                                 
                             <div class="panel-right">
 							<h3><?php echo $users;?></h3>
-                               <strong> Total students</strong>
+                               <strong> Total students/Employee</strong>
 
                             </div>
                         </div>
@@ -90,7 +99,7 @@ $sellers=$stmt->rowCount();
                                
                             </div>
                             <div class="panel-right">
-							 <h3><?php echo $trnumb;?></h3>
+							 <h3><?php echo $am;?>Rwf</h3>
                                <strong> Total sales</strong>
 
                             </div>

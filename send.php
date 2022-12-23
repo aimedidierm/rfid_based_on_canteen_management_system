@@ -5,7 +5,6 @@ error_reporting(E_ALL);
 require 'php-includes/connect.php';
 function getToken() {
     $curl = curl_init();
-  
     curl_setopt_array($curl, array(
       CURLOPT_URL => BASE_URL . '/auth/agents/authorize',
       CURLOPT_RETURNTRANSFER => true,
@@ -15,7 +14,7 @@ function getToken() {
       CURLOPT_FOLLOWLOCATION => true,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => 'POST',
-      CURLOPT_POSTFIELDS => '{"client_id": "b499131c-6f65-11ed-929a-dead64802bd2","client_secret": "e9f6fd694cbd79c3d10b603cf0796296da39a3ee5e6b4b0d3255bfef95601890afd80709"}',
+      CURLOPT_POSTFIELDS => '{"client_id": "437b2c04-82cc-11ed-9bef-dead986dd4f7","client_secret": "bff4ad8c4de23242b46a306e9293989ada39a3ee5e6b4b0d3255bfef95601890afd80709"}',
       CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
     ));
   
@@ -110,7 +109,7 @@ if(isset($_POST['pay'])){
                                 <div class="col-lg-6">
                                     <form id="login-form" class="form" method="post">
                                         <div class="form-group">
-                                            <label>Student ID:</label>
+                                            <label>Card ID:</label>
                                             <input name="sid" class="form-control" placeholder="Enter ID" type="text">
                                         </div>
                                         <div class="form-group">

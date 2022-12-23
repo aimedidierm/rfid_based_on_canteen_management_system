@@ -6,7 +6,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><strong>Smart student card</strong></a>
+                <a class="navbar-brand" href="#"><strong>RFID Canteen MS</strong></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">

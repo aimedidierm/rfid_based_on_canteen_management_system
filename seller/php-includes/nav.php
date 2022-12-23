@@ -6,7 +6,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><strong>RFID Canteen MS</strong></a>
+                <a class="navbar-brand" href="#"><strong>RFID Canteen MS</strong></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -41,6 +41,9 @@
                     </li>
                     <li>
                         <a href="transactions.php"><i class="fa fa-table"></i> Transactions</a>
+                    </li>
+                    <li>
+                        <a href="orders.php"><i class="fa fa-table"></i> Orders</a>
                     </li>
                     <li>
                         <a href="settings.php"><i class="fa fa-gear"></i> Settings</a>

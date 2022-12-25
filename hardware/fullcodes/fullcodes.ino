@@ -20,7 +20,13 @@ char newNum[12]="",money[12]="",pass[12]="";
 //define the cymbols on the buttons of the keypads
 char keys[ROWS][COLS] = {
 
-char keys[ROWS][COLS] = {
+    {'1','2','3'},
+
+    {'4','5','6'},
+
+    {'7','8','9'},
+
+    {'*','0','#'}
 
 };
 
@@ -37,7 +43,7 @@ void setup()
   lcd.init();
   lcd.backlight();
   SPI.begin();  
-  Serial.begin(115200);   // Initiate a serial communication
+  Serial.begin(9600);   // Initiate a serial communication
   SPI.begin();      // Initiate  SPI bus
   mfrc522.PCD_Init();   // Initiate MFRC522
   pinMode(red , OUTPUT);
@@ -46,9 +52,9 @@ void setup()
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print("RFID based on");
-  lcd.setCursor(0,0);
-  lcd.print("Canteen MS");
-  delay(5000);
+  lcd.setCursor(0,1);
+  lcd.print("canteen MS");
+  delay(3000);
 }
 
 void loop() 
@@ -56,7 +62,7 @@ void loop()
   readcard();
 }
 
-
+  
 void(* resetFunc) (void) = 0;
 
 void readcard(){
@@ -67,7 +73,22 @@ void readcard(){
   lcd.print("Tap your card");
   delay(500);
   if ( ! mfrc522.PICC_IsNewCardPresent()) 
-	void readcard(){
+  {
+    readcard();
+    //return;
+  }
+  // Select one of the cards
+  if ( ! mfrc522.PICC_ReadCardSerial()) 
+  {
+    readcard();
+    //return;
+  }
+  String content= "";
+  byte letter;
+  for (byte i = 0; i < mfrc522.uid.size; i++) 
+  {
+     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
+     content.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
   content.toUpperCase();
   card=content.substring(1);
@@ -78,7 +99,7 @@ void entermoney(){
   int j=0,k=0;
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Enter money: ");
+  lcd.print("Enter code: ");
   for( int d=2; d>1;d++){
     int key = keypad.getKey();
     if (key!=NO_KEY && key!='#' && key!='*'){
@@ -115,17 +136,18 @@ void enterpass(){
     lcd.clear();
     lcd.setCursor(0,0);
     lcd.print("Loading");
-    Serial.println((String)"card='"+card+"'&money="+money+"'&pass="+pass);
-    delay(5000);
+    Serial.println((String)"card="+card+"&code="+money+"&pass="+pass);
     while(k==0){
       if (Serial.available() > 0) {
         //kwakira data zivuye kuri node mcu na server
+      String  data=Serial.readStringUntil('\n');
+      Serial.println(data);
       DynamicJsonBuffer jsonBuffer;
-      JsonObject& root = jsonBuffer.parseObject(Serial.readStringUntil('\n'));
-      if (root["cstatus"]) {
-        cstatus=root["cstatus"];
-      if(cstatus==1){
-        balance=root["balance"];
+      JsonObject& root = jsonBuffer.parseObject(data);
+      if (root["c"]) {
+        cstatus=root["c"];
+      if(cstatus==4){
+        balance=root["b"];
         sussc();
       }
       if(cstatus==2){
@@ -133,8 +155,13 @@ void enterpass(){
       }
       if(cstatus==3){
         inpass();
+      }      
+      if(cstatus==5){
+        codenot();
       }
-
+      if(cstatus==6){
+        nouser();
+      }
       }
       }
       }
@@ -145,12 +172,9 @@ void enterpass(){
 void lowbalance(){
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Insufficient");
-  lcd.setCursor(0, 1);
-  lcd.print("funds");
+  lcd.print("Low balance");
   digitalWrite(red,HIGH);
-  tone(buzzer, 
-  1000, 1000);
+  tone(buzzer,1000, 1000);
   delay(3000);
   digitalWrite(red,LOW);
   resetFunc();
@@ -165,6 +189,26 @@ void inpass() {
   digitalWrite(red,LOW);
   resetFunc();
 }
+void codenot(){
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Code not valid");
+  digitalWrite(red,HIGH);
+  tone(buzzer, 700, 1000);
+  delay(3000);
+  digitalWrite(red,LOW);
+  resetFunc();
+  }
+void nouser(){
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Card not found");
+  digitalWrite(red,HIGH);
+  tone(buzzer, 700, 1000);
+  delay(3000);
+  digitalWrite(red,LOW);
+  resetFunc();
+  }
 void sussc(){
   lcd.clear();
   lcd.setCursor(0, 0);

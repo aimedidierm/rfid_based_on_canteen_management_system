@@ -1,7 +1,8 @@
 <?php
 require 'php-includes/connect.php';
 if(isset($_REQUEST['card'])){
-    $card = $_REQUEST['card'];
+    //$card = $_REQUEST['card'];
+    $card = "12";
     $code = $_REQUEST['code'];
     $pass = $_REQUEST['pass'];
     $query = "SELECT s.id,s.balance FROM student AS s WHERE card = ? AND password = ? limit 1";
@@ -25,7 +26,7 @@ if(isset($_REQUEST['card'])){
             $sql ="INSERT INTO transactions (credit, student) VALUES (?,?)";
             $stm = $db->prepare($sql);
             $stm->execute(array($money, $user));
-            $arr = array('c' => 4,'ba' => $newamount);
+            $arr = array('c' => 4,'b' => $newamount);
             echo $data = json_encode($arr)."\n";
         } else {
                 //no balance

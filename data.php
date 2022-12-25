@@ -1,8 +1,7 @@
 <?php
 require 'php-includes/connect.php';
 if(isset($_REQUEST['card'])){
-    //$card = $_REQUEST['card'];
-    $card = "12";
+    $card = $_REQUEST['card'];
     $code = $_REQUEST['code'];
     $pass = $_REQUEST['pass'];
     $query = "SELECT s.id,s.balance FROM student AS s WHERE card = ? AND password = ? limit 1";

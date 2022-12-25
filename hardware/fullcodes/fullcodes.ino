@@ -128,7 +128,7 @@ void enterpass(){
         pass[j+1]='\0';   
         j++;
         lcd.setCursor(0,1);
-        lcd.print("*");
+        lcd.print("**********");
     }
     if (key=='#'&& j>0)
     {
@@ -136,7 +136,7 @@ void enterpass(){
     lcd.clear();
     lcd.setCursor(0,0);
     lcd.print("Loading");
-    Serial.println((String)"card="+card+"&code="+money+"&pass="+pass);
+    Serial.println((String)"{'card':'" + card + "', '" + "code':" + money + ", " + "'pass':'" + pass + "'}");
     while(k==0){
       if (Serial.available() > 0) {
         //kwakira data zivuye kuri node mcu na server

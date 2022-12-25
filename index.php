@@ -58,72 +58,72 @@ require 'php-includes/connect.php';
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
-                        <!--
+                    <form id="login-form" class="form" action="login.php" method="post">
                         <div class="col-lg-3">
-                                <form id="login-form" class="form" action="login.php" method="post">
                                 <div class="form-group">
-                                    <label>Beans: 100 Rwf/1</label>
-                                    <input name="email" class="form-control" placeholder="Enter email" type="email">
+                                    <label>Milk: 400 Rwf/L</label>
+                                    <input name="email" class="form-control" placeholder="Enter Qty" type="number">
                                 </div>
                                 <div class="form-group">
-                                    <label>Beans: 100 Rwf/1</label>
-                                    <input name="email" class="form-control" placeholder="Enter email" type="email">
+                                    <label>Cream: 1000 Rwf/1</label>
+                                    <input name="email" class="form-control" placeholder="Enter Qty" type="number">
                                 </div>
                                 <div class="form-group">
-                                    <label>Beans: 100 Rwf/1</label>
-                                    <input name="email" class="form-control" placeholder="Enter email" type="email">
+                                    <label>Butter: 500 Rwf/1</label>
+                                    <input name="email" class="form-control" placeholder="Enter Qty" type="number">
                                 </div>
                                 <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="order">
                                 </div>
-                                </form>
                         </div>
                         <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Beans: 100 Rwf/1</label>
-                                    <input name="email" class="form-control" placeholder="Enter email" type="email">
+                                    <label>Chees: 250 Rwf/1</label>
+                                    <input name="email" class="form-control" placeholder="Enter Qty" type="number">
                                 </div>
                                 <div class="form-group">
-                                    <label>Beans: 100 Rwf/1</label>
-                                    <input name="email" class="form-control" placeholder="Enter email" type="email">
+                                    <label>Yogurt: 800 Rwf/1</label>
+                                    <input name="email" class="form-control" placeholder="Enter Qty" type="number">
                                 </div>
                                 <div class="form-group">
-                                    <label>Beans: 100 Rwf/1</label>
-                                    <input name="email" class="form-control" placeholder="Enter email" type="email">
-                                </div>
-                        </div>
-                        <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Beans: 100 Rwf/1</label>
-                                    <input name="email" class="form-control" placeholder="Enter email" type="email">
-                                </div>
-                                <div class="form-group">
-                                    <label>Beans: 100 Rwf/1</label>
-                                    <input name="email" class="form-control" placeholder="Enter email" type="email">
-                                </div>
-                                <div class="form-group">
-                                    <label>Beans: 100 Rwf/1</label>
-                                    <input name="email" class="form-control" placeholder="Enter email" type="email">
+                                    <label>Baguette: 2500 Rwf/1</label>
+                                    <input name="email" class="form-control" placeholder="Enter Qty" type="number">
                                 </div>
                         </div>
                         <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Beans: 100 Rwf/1</label>
-                                    <input name="email" class="form-control" placeholder="Enter email" type="email">
+                                    <label>Bread: 1200 Rwf/1</label>
+                                    <input name="email" class="form-control" placeholder="Enter Qty" type="number">
                                 </div>
                                 <div class="form-group">
-                                    <label>Beans: 100 Rwf/1</label>
-                                    <input name="email" class="form-control" placeholder="Enter email" type="email">
+                                    <label>Mango Juice: 250 Rwf/1</label>
+                                    <input name="email" class="form-control" placeholder="Enter Qty" type="number">
                                 </div>
                                 <div class="form-group">
-                                    <label>Beans: 100 Rwf/1</label>
-                                    <input name="email" class="form-control" placeholder="Enter email" type="email">
+                                    <label>Apple Juices: 250 Rwf/1</label>
+                                    <input name="email" class="form-control" placeholder="Enter Qty" type="number">
                                 </div>
-                        </div>-->
+                        </div>
+                        <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Fresh Fruit Juice: 2000 Rwf/1</label>
+                                    <input name="email" class="form-control" placeholder="Enter Qty" type="number">
+                                </div>
+                                <div class="form-group">
+                                    <label>Lemon: 100 Rwf/1</label>
+                                    <input name="email" class="form-control" placeholder="Enter Qty" type="number">
+                                </div>
+                                <div class="form-group">
+                                    <label>Banana: 50 Rwf/1</label>
+                                    <input name="email" class="form-control" placeholder="Enter Qty" type="number">
+                                </div>
+                                
+                        </div>
                             <!-- /.row (nested) -->
                         </div>
                         <!-- /.panel-body -->
                     </div>
+                    </form>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->

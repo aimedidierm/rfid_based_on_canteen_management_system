@@ -46,29 +46,26 @@ require 'php-includes/check-login.php';
                                     <thead>
                                         <tr>
                                             <th>N</th>
-                                            <th>Names</th>
+                                            <th>Products</th>
                                             <th>Amount</th>
+                                            <th>Code</th>
                                             <th>Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = "SELECT * FROM seller WHERE email = ?";
+                                        $sql = "SELECT * FROM orders";
                                         $stmt = $db->prepare($sql);
-                                        $stmt->execute(array($_SESSION['code']));
-                                        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                                        $myid = $row['id'];
-                                        $sql = "SELECT * FROM transactions WHERE seller = ?";
-                                        $stmt = $db->prepare($sql);
-                                        $stmt->execute(array($myid));
+                                        $stmt->execute();
                                         if ($stmt->rowCount() > 0) {
                                             $count = 1;
                                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                             ?>
                                         <tr>
                                             <td><?php print $count?></td>
-                                            <td><?php print $row['names']?></td>
-                                            <td><?php print $row['credit']?></td>
+                                            <td><?php null ?></td>
+                                            <td><?php print $row['amount']?></td>
+                                            <td><?php print $row['code']?></td>
                                             <td><?php print $row['time']?></td>
                                         </tr>
                                         <?php

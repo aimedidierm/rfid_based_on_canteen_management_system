@@ -6,7 +6,7 @@
 const char* ssid = "innovate";
 const char* password = "innovate";
 
-String serverName = "http://192.168.137.26/rfid_based_on_canteen_management_system/data.php";
+String serverName = "http://137.184.232.255/rfid_based_on_canteen_management_system/data.php";
 
 void setup() {
   Serial.begin(9600); 

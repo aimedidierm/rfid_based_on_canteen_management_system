@@ -1,5 +1,10 @@
 <?php
 require 'php-includes/connect.php';
+// $query = "SELECT amount,code FROM orders WHERE id = 1 limit 1";
+// $stmt = $db->prepare($query);
+// $stmt->execute(array($code));
+// $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+// $money=$rows['amount'];
 if(isset($_REQUEST['card'])){
     $card = $_REQUEST['card'];
     $code = $_REQUEST['code'];
@@ -22,6 +27,9 @@ if(isset($_REQUEST['card'])){
             $sql ="UPDATE student SET balance = ? WHERE id = ? limit 1";
             $stm = $db->prepare($sql);
             $stm->execute(array($newamount, $user));
+            // $sql ="UPDATE seller SET balance = ? WHERE id = ? limit 1";
+            // $stm = $db->prepare($sql);
+            // $stm->execute(array($newamount1, $seller));
             $sql ="INSERT INTO transactions (credit, student) VALUES (?,?)";
             $stm = $db->prepare($sql);
             $stm->execute(array($money, $user));

@@ -3,10 +3,10 @@
 #include <WiFiClient.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "innovate";
-const char* password = "innovate";
+const char* ssid = "Balance";
+const char* password = "balance1234";
 
-String serverName = "http://137.184.232.255/rfid_based_on_canteen_management_system/data.php";
+String serverName = "http://192.168.43.83/rfid_based_on_canteen_management_system/data.php";
 
 void setup() {
   Serial.begin(9600); 
@@ -26,41 +26,50 @@ void setup() {
 
 void loop() {
   // Send an HTTP POST request depending on timerDelay
-  if (Serial.available( ) > 0) {
-    //Check WiFi connection status
-    if(WiFi.status()== WL_CONNECTED){
+  if (Serial.available() > 0) {
+    // Check WiFi connection status
+    if(WiFi.status() == WL_CONNECTED){
       WiFiClient client;
       HTTPClient http;
       String data = Serial.readStringUntil('\n');
-      DynamicJsonBuffer jsonBuffer;
-      JsonObject& root = jsonBuffer.parseObject(data);
+      
+      // JSON Parsing with ArduinoJson v6
+      DynamicJsonDocument doc(1024);  // Adjust size if necessary
+      DeserializationError error = deserializeJson(doc, data);
+      
+      if (error) {
+        Serial.print("deserializeJson() failed: ");
+        Serial.println(error.c_str());
+        return;
+      }
+
+      JsonObject root = doc.as<JsonObject>();
       String card = root["card"];
       String code = root["code"];
       String pass = root["pass"];
+
       String serverPath = serverName + "?card=" + card + "&code=" + code  + "&pass=" + pass;
       Serial.println(serverPath);
       http.begin(client, serverPath);
   
       // If you need Node-RED/server authentication, insert user and password below
-      //http.setAuthorization("REPLACE_WITH_SERVER_USERNAME", "REPLACE_WITH_SERVER_PASSWORD");
+      // http.setAuthorization("REPLACE_WITH_SERVER_USERNAME", "REPLACE_WITH_SERVER_PASSWORD");
         
       // Send HTTP GET request
       int httpResponseCode = http.GET();
       
-      if (httpResponseCode>0) {
+      if (httpResponseCode > 0) {
         Serial.print("HTTP Response code: ");
         Serial.println(httpResponseCode);
         String payload = http.getString();
         Serial.println(payload);
-      }
-      else {
+      } else {
         Serial.print("Error code: ");
         Serial.println(httpResponseCode);
       }
       // Free resources
       http.end();
-    }
-    else {
+    } else {
       Serial.println("WiFi Disconnected");
     }
   }

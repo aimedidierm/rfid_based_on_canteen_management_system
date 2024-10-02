@@ -36,7 +36,7 @@ CREATE TABLE `admin` (
   `address` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `admin`
@@ -68,7 +68,7 @@ CREATE TABLE `orders` (
   `amount` int NOT NULL,
   `code` int NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `orders`
@@ -90,7 +90,7 @@ CREATE TABLE `pending_withdraw` (
   `seller` int NOT NULL,
   `amount` int NOT NULL,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `pending_withdraw`
@@ -114,7 +114,7 @@ CREATE TABLE `school` (
   `address` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `school`
@@ -139,7 +139,7 @@ CREATE TABLE `seller` (
   `balance` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `seller`
@@ -162,9 +162,9 @@ CREATE TABLE `student` (
   `phone` varchar(255) NOT NULL DEFAULT '0',
   `balance` int NOT NULL,
   `school` int NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(255) NOT NULL,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `student`
@@ -187,7 +187,7 @@ CREATE TABLE `transactions` (
   `student` int DEFAULT NULL,
   `school` int DEFAULT NULL,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `transactions`

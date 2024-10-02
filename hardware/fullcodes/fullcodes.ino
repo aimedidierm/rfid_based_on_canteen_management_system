@@ -9,9 +9,9 @@
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
 LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
-#define red 7
-#define green 8
-#define buzzer 6
+#define red 6
+#define green 5
+#define buzzer 8
 
 const byte ROWS = 4; //four rows
 const byte COLS = 4; //four columns
@@ -30,13 +30,16 @@ char keys[ROWS][COLS] = {
 
 };
 
-byte rowPins[ROWS] = {A0,A1,A2,A3}; //connect to the row pinouts of the keypad
-byte colPins[COLS] = {2,3,4}; //connect to the column pinouts of the keypad
+byte rowPins[ROWS] = {7,3,4,2}; //connect to the row pinouts of the keypad
+// byte colPins[COLS] = {A0,A1,A2,A3}; //connect to the column pinouts of the keypad
+byte colPins[COLS] = {A0,A1,A2}; //connect to the column pinouts of the keypad
 
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 
 int cstatus=0,balance=0;
 String card;
+String data = "";
+
 void setup() 
 {
   lcd.init();
@@ -87,7 +90,7 @@ void readcard(){
   byte letter;
   for (byte i = 0; i < mfrc522.uid.size; i++) 
   {
-     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
+     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? "0" : ""));
      content.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
   content.toUpperCase();
@@ -132,43 +135,66 @@ void enterpass(){
     }
     if (key=='#'&& j>0)
     {
-    j=0;
-    lcd.clear();
-    lcd.setCursor(0,0);
-    lcd.print("Loading");
-    Serial.println((String)"{'card':'" + card + "', '" + "code':" + money + ", " + "'pass':'" + pass + "'}");
-    while(k==0){
-      if (Serial.available() > 0) {
-        //kwakira data zivuye kuri node mcu na server
-      String  data=Serial.readStringUntil('\n');
-      Serial.println(data);
-      DynamicJsonBuffer jsonBuffer;
-      JsonObject& root = jsonBuffer.parseObject(data);
-      if (root["c"]) {
-        cstatus=root["c"];
-      if(cstatus==4){
-        balance=root["b"];
-        sussc();
-      }
-      if(cstatus==2){
-        lowbalance();
-      }
-      if(cstatus==3){
-        inpass();
-      }      
-      if(cstatus==5){
-        codenot();
-      }
-      if(cstatus==6){
-        nouser();
-      }
-      }
-      }
-      }
+      j=0;
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Loading");
+      // Serial.println((String)"{'card':'" + card + "', '" + "code':" + money + ", " + "'pass':'" + pass + "'}");
+      String request = card + "," + money + "," + pass + "\n";
+      Serial.print(request);
+      delay(1000);
+      processTransaction();
     }
     delay(100);
     }
   }
+
+void processTransaction() {
+  bool transactionCompleted = false;
+
+  StaticJsonDocument<512> doc;  
+
+  while (!transactionCompleted) {
+    if (Serial.available() > 0) {
+      data = Serial.readStringUntil('\n');
+      Serial.println(data);
+      delay(100);
+      doc.clear();
+
+      DeserializationError error = deserializeJson(doc, data);
+      delay(100);
+
+      if (error) {
+        Serial.print(F("deserializeJson() failed: "));
+        Serial.println(error.f_str());
+        return;
+      }
+
+      if (doc["c"]) {
+        cstatus=doc["c"];
+        if(cstatus==4){
+          balance=doc["b"];
+          sussc();
+        }
+        if(cstatus==2){
+          lowbalance();
+        }
+        if(cstatus==3){
+          inpass();
+        }      
+        if(cstatus==5){
+          codenot();
+        }
+        if(cstatus==6){
+          nouser();
+        }
+        transactionCompleted = true;
+      }
+    }
+
+    delay(100);
+  }
+}
 void lowbalance(){
   lcd.clear();
   lcd.setCursor(0, 0);
